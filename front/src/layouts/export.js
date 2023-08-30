@@ -1,0 +1,19 @@
+/**
+ * @description 公共布局及样式自动引入
+ */
+
+import Vue from 'vue'
+
+const requireComponents = require.context('./components', true, /\.vue$/)
+requireComponents.keys().forEach((fileName) => {
+  const componentConfig = requireComponents(fileName)
+  const componentName = componentConfig.default.name
+  Vue.component(componentName, componentConfig.default || componentConfig)
+})
+
+const requireZxLayouts = require.context('layouts', true, /\.vue$/)
+requireZxLayouts.keys().forEach((fileName) => {
+  const componentConfig = requireZxLayouts(fileName)
+  const componentName = componentConfig.default.name
+  Vue.component(componentName, componentConfig.default || componentConfig)
+})
